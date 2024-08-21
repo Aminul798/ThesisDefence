@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    
+    
+    <label for="to">To Email</label>
+    <input type="text" id="to"><br>
+    
+    <label for="message">Message</label><br>
+    <textarea id="message" cols="30" rows="10"></textarea><br>
+    
+    <button onclick="sendMail()">Send</button>
+
+    <script>
+        (function(){
+            emailjs.init("XmBsFuNcTkkEouQLJ");
+        })();
+
+        function sendMail() {
+            var params = {
+                to: document.querySelector("#to").value,
+                message: document.querySelector("#message").value,
+            };
+
+            var serviceID = "service_p2p0dkq";
+            var templateID = "template_xwpia39";
+
+            emailjs.send(serviceID, templateID, params)
+            .then(res => {
+                alert("Message Sent");
+            })
+            .catch(err => {
+                console.error("Failed to send email:", err);
+                alert("Failed to send email. Please try again later.");
+            });
+        }
+    </script>
+</body>
+</html>
